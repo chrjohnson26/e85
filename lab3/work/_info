@@ -1,0 +1,94 @@
+m255
+K4
+z2
+!s12c _opt1
+Z0 !s99 nomlopt
+!s11f MIXED_VERSIONS
+Z1 !s12c _opt
+R0
+R1
+R0
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z2 dC:/intelFPGA_pro/24.2
+T_opt
+!s110 1726641227
+V<RRIAHOlcTMJHaSOPiIY72
+Z3 04 9 4 work testbench fast 0
+=1-089df44edfb8-66ea744b-22c-366c
+R0
+!s12f OEM100
+Z4 !s12b OEM100
+Z5 !s124 OEM10U2 
+Z6 o-quiet -auto_acc_if_foreign -work work +acc
+Z7 tCvgOpt 0
+n@_opt
+OL;O;2024.1;79
+R2
+T_opt1
+!s110 1726641614
+VdS49kl7KNAgOhZcnmj3PJ3
+R3
+=1-c45ab1e412cc-66ea75cd-2fb-25c4
+R0
+R4
+R5
+R6
+R7
+n@_opt1
+OL;O;2023.1;77
+vlab3_CJ
+Z8 2C:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv
+Z9 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z10 !s110 1726641583
+!i10b 1
+!s100 IE]:D9Jfm[XB:mjX16HO61
+IH`ALoH23V9B6VQB^jfO9B1
+S1
+Z11 dC:/Users/chrjohnson/Downloads/chrjohnson
+w1726640301
+8C:/Users/chrjohnson/Downloads/chrjohnson/lab3_CJ.sv
+FC:/Users/chrjohnson/Downloads/chrjohnson/lab3_CJ.sv
+!i122 8
+L0 1 65
+Z12 VDg1SIo80bB@j0V0VzS_@n1
+Z13 OL;L;2023.1;77
+r1
+!s85 0
+31
+Z14 !s108 1726641583.000000
+!s107 C:/Users/chrjohnson/Downloads/chrjohnson/lab3_CJ.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/chrjohnson/Downloads/chrjohnson/lab3_CJ.sv|
+!i113 0
+Z15 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R7
+nlab3_@c@j
+vtestbench
+R8
+R9
+R10
+!i10b 1
+!s100 ?UiSOzG?4`zl^i<AVNnG:2
+IR1e8I?0hP6LMme2V``QbF3
+S1
+R11
+w1726638839
+8C:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv
+FC:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv
+!i122 9
+L0 1 40
+R12
+R13
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv|
+!i113 0
+R15
+R7

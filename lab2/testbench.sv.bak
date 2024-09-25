@@ -1,0 +1,27 @@
+module testbench();
+logic clk, reset;
+logic clk, reset;
+// 'clk' & 'reset' are common names for the clock and the reset, 
+ // but they're not reserved.
+logic a, b, c, d, e, f, g, y2, y1, y0, y2_expected, y1_expected, y0_expected;
+// These variables or signals represent 3 inputs, 2 outputs, 2 expected 
+// outputs, respectively.
+logic [31:0] vectornum, errors;
+// '[31:0]' indicates that the following signals, vectornum and errors 
+// in this case, are 32-bit long (start from bit 0 to bit 31) in little 
+// endian order (the least significant bit at the lowest address or 
+// [msb:lsb]).
+// vectornum shows the number of test vectors that has been applied.
+// errors represents the number of errors found.
+// The size of 'int' data type is 4 bytes, thus 32 bits. 
+logic [4:0] testvectors[10000:0];
+// Above is a 5-bit binary array named testvectors with index 0 to 10000 
+//(testvectors[0],testvectors[1],testvectors[2],...,testvectors[10000]).
+// In other words, testvectors contains 10001 elements, each of which is 
+// a 5-bit binary number. The number of bits represent the sum of the 
+// number of input and output bits (eg. three 1-bit inputs + two 1-bit 
+// outputs = one 5-bit testvector). 
+// In this tutorial, we will only 
+// use 8 test vectors (found in .tv file below), however it doesn’t hurt 
+// to set up array to support more so we could easily add test vectors
+// later.

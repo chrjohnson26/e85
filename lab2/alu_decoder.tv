@@ -1,0 +1,16 @@
+// a b c d e f g _ y2 y1 y0
+// Testing using the logic table from page 17 of lab manual
+// add
+0000000_000
+1000000_000
+1000001_000
+1000010_000
+// subtract 
+0100000_001
+1000011_001
+// set less than
+1001000_101
+// or
+1011000_011
+// and
+1011100_010

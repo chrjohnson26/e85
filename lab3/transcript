@@ -1,0 +1,32 @@
+# Compile of lab3_CJ.sv was successful.
+# Compile of testbench.sv was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.testbench -voptargs=+acc
+# vsim work.testbench -voptargs="+acc" 
+# Start time: 23:40:12 on Sep 17,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.lab3_CJ(fast)
+add wave  \
+sim:/testbench/clk \
+sim:/testbench/reset \
+sim:/testbench/left \
+sim:/testbench/right \
+sim:/testbench/la \
+sim:/testbench/lb \
+sim:/testbench/lc \
+sim:/testbench/ra \
+sim:/testbench/rb \
+sim:/testbench/rc \
+sim:/testbench/expected \
+sim:/testbench/vectornum \
+sim:/testbench/errors \
+sim:/testbench/testvectors
+run 200
+#         14 tests completed with          0 errors
+# ** Note: $stop    : C:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv(37)
+#    Time: 155 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/chrjohnson/Downloads/chrjohnson/testbench.sv line 37

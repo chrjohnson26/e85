@@ -1,0 +1,28 @@
+|alu_decoder
+a => a1.IN0
+a => a2.IN0
+a => a4.IN0
+a => a5.IN0
+a => a3.IN0
+b => a3.IN1
+b => a1.IN1
+b => a2.IN1
+b => a4.IN1
+b => a5.IN1
+c => a2.IN2
+c => a1.IN2
+c => a4.IN2
+d => a1.IN3
+d => a2.IN3
+d => a5.IN2
+d => a4.IN3
+e => a1.IN4
+e => a4.IN4
+e => a5.IN3
+f => a4.IN5
+g => a4.IN6
+y2 << a1.DB_MAX_OUTPUT_PORT_TYPE
+y1 << a2.DB_MAX_OUTPUT_PORT_TYPE
+y0 << o1.DB_MAX_OUTPUT_PORT_TYPE
+
+

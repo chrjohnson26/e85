@@ -1,0 +1,17 @@
+module lab3_CJ(input logic clk,
+ input logic reset,
+ input logic left, right,
+ output logic la, lb, lc, ra, rb, rc);
+ 
+ 
+ // HDL Example 7.8 Resettable Flip-Flop from textbook
+ module flopr #(parameter WIDTH = 8)
+					(input logic 	clk, reset,
+					input logic[WIDTH-1:0]d,
+					output logic[WIDTH-1:0]q);
+					
+	always_ff@(posedge clk, posedge reset)
+					if (reset q<=0;
+					else q<=d;
+endmodule
+ 

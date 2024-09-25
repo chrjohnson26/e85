@@ -1,0 +1,96 @@
+m255
+K4
+z2
+!s12c _opt1
+Z0 !s99 nomlopt
+Z1 !s12c _opt
+R0
+R1
+R0
+R1
+R0
+!s11f vlog 2024.1 2024.04, Apr 19 2024
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z2 dC:/intelFPGA_pro/24.2
+T_opt
+!s110 1726041855
+Vc3c85S:`Fk62838]0_>=S0
+Z3 04 9 4 work testbench fast 0
+=1-089df44dbd81-66e14eff-26a-3bb4
+R0
+Z4 !s12f OEM100
+Z5 !s12b OEM100
+Z6 !s124 OEM10U2 
+Z7 o-quiet -auto_acc_if_foreign -work work +acc
+Z8 tCvgOpt 0
+n@_opt
+Z9 OL;O;2024.1;79
+R2
+T_opt1
+!s110 1726097269
+V>E5Z7hgZiRJX40K56Ub^Z2
+R3
+=1-089df44dbd81-66e22775-176-1008
+R0
+R4
+R5
+R6
+R7
+R8
+n@_opt1
+R9
+valu_decoder
+2C:/Users/chrjohnson/Downloads/Christian/lab2/alu_decoder.sv
+Z10 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z11 !s110 1726097211
+!i10b 1
+!s100 PonJC[LkXO044kBe4a[:21
+IWH=SQSQfzH48efE9OG[i:1
+S1
+Z12 dC:/Users/chrjohnson/Downloads/Christian/lab2
+w1726036378
+8C:/Users/chrjohnson/Downloads/Christian/lab2/alu_decoder.sv
+FC:/Users/chrjohnson/Downloads/Christian/lab2/alu_decoder.sv
+!i122 11
+L0 3 30
+Z13 VDg1SIo80bB@j0V0VzS_@n1
+Z14 OL;L;2024.1;79
+r1
+!s85 0
+31
+!s108 1726097210.000000
+!s107 C:/Users/chrjohnson/Downloads/Christian/lab2/alu_decoder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/chrjohnson/Downloads/Christian/lab2/alu_decoder.sv|
+!i113 0
+Z15 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R8
+vtestbench
+2C:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv
+R10
+R11
+!i10b 1
+!s100 C=cR<A@W1Z=jCRe6<a1Ud1
+I6iF9B6f@3]We2niH:zIC81
+S1
+R12
+w1726041583
+8C:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv
+FC:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv
+!i122 12
+L0 1 120
+R13
+R14
+r1
+!s85 0
+31
+!s108 1726097211.000000
+!s107 C:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv|
+!i113 0
+R15
+R8

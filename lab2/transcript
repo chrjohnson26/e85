@@ -1,0 +1,43 @@
+# Compile of alu_decoder.sv was successful.
+# Compile of testbench.sv was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.testbench -voptargs=+acc
+# vsim work.testbench -voptargs="+acc" 
+# Start time: 16:27:49 on Sep 11,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.testbench(fast)
+# Loading work.alu_decoder(fast)
+add wave  \
+sim:/testbench/clk \
+sim:/testbench/reset \
+sim:/testbench/a \
+sim:/testbench/b \
+sim:/testbench/c \
+sim:/testbench/d \
+sim:/testbench/e \
+sim:/testbench/f \
+sim:/testbench/g \
+sim:/testbench/y2 \
+sim:/testbench/y1 \
+sim:/testbench/y0 \
+sim:/testbench/y2_expected \
+sim:/testbench/y1_expected \
+sim:/testbench/y0_expected \
+sim:/testbench/vectornum \
+sim:/testbench/errors \
+sim:/testbench/testvectors
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: chrjohnson  Hostname: DNB2WX3  ProcessID: 15284
+#           Attempting to use alternate WLF file "./wlfty82n3e".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfty82n3e
+run 200
+#          9 tests completed with          0 errors
+# ** Note: $stop    : C:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv(110)
+#    Time: 105 ns  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/chrjohnson/Downloads/Christian/lab2/testbench.sv line 110
+# End time: 16:31:00 on Sep 11,2024, Elapsed time: 0:03:11
+# Errors: 0, Warnings: 8

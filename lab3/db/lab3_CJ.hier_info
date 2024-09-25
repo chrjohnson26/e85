@@ -1,0 +1,29 @@
+|lab3_CJ
+clk => s[0].CLK
+clk => s[1].CLK
+clk => s[2].CLK
+clk => s[3].CLK
+clk => s[4].CLK
+clk => s[5].CLK
+clk => s[6].CLK
+reset => s[0].PRESET
+reset => s[1].ACLR
+reset => s[2].ACLR
+reset => s[3].ACLR
+reset => s[4].ACLR
+reset => s[5].ACLR
+reset => s[6].ACLR
+left => a2.IN1
+left => a1.IN1
+left => a3.IN1
+right => a3.IN2
+right => a1.IN2
+right => a2.IN2
+la << o2.DB_MAX_OUTPUT_PORT_TYPE
+lb << o3.DB_MAX_OUTPUT_PORT_TYPE
+lc << b5.DB_MAX_OUTPUT_PORT_TYPE
+ra << o4.DB_MAX_OUTPUT_PORT_TYPE
+rb << o5.DB_MAX_OUTPUT_PORT_TYPE
+rc << b6.DB_MAX_OUTPUT_PORT_TYPE
+
+
