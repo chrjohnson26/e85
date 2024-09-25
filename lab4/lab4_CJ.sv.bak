@@ -1,0 +1,14 @@
+module lab4_CJ(input logic reset,
+					output logic gamestatus);
+
+	// Internal logic for states
+	typedef enum logic [1:0] {S0, S1, S2, S3, S4, S5, S6} statetype;
+	
+
+endmodule
+
+module room(input );
+endmodule
+
+module sword();
+endmodule
