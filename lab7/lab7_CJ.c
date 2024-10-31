@@ -5,13 +5,13 @@
 
 #include <stdint.h>
 
-#define LED_LEFT 21     // LED_LEFT on GPIO 21
-#define LED_RIGHT 20    // LED_RIGHT on GPIO 20
+#define LED_LEFT 20     // LED_LEFT on GPIO 20
+#define LED_RIGHT 18    // LED_RIGHT on GPIO 18
 
 #define BUT_LEFT 11     // BUT_LEFT on GPIO 11
 #define BUT_RIGHT 10    // BUT_RIGHT on GPIO 10
 
-#define DUR 250
+#define DUR 500
 
 void delay(int ms);
 int level(int length);
@@ -20,6 +20,7 @@ int check_level(int length);
 int main(void);
 void flash(int times);
 void display(int left_input, int right_input);
+void win_display(void);
 
 // Define LED predetermined sequence
 // "0" represents the left button pressed
@@ -32,7 +33,18 @@ volatile uint32_t *GPIO_INPUT_EN   = (uint32_t *)0x10012004;
 volatile uint32_t *GPIO_OUTPUT_EN  = (uint32_t *)0x10012008;
 volatile uint32_t *GPIO_OUTPUT_VAL = (uint32_t *)0x1001200C;
 
-
+void win_display(void) {
+    for (int i = 0; i < 10; i++) {
+      // Turn on both LEDS
+      *GPIO_OUTPUT_VAL |= (1 << LED_LEFT);
+      *GPIO_OUTPUT_VAL |= (1 << LED_RIGHT);
+      delay(DUR/10);
+      // Turn off both LEDS
+      *GPIO_OUTPUT_VAL &= ~(1 << LED_LEFT);
+      *GPIO_OUTPUT_VAL &= ~(1 << LED_RIGHT);
+      delay(DUR/5);
+    }
+}
 
 void delay(int ms) {
   volatile uint64_t *mtime = (uint64_t *)0x0200bff8;
@@ -49,7 +61,7 @@ void display(int left_input, int right_input) {
     *GPIO_OUTPUT_VAL &= ~(1 << LED_LEFT);
     delay(DUR);
   }
-  else {
+  if (right_input) {
     // Turn on right LED
     *GPIO_OUTPUT_VAL |= (1 << LED_RIGHT);
     delay(DUR);
@@ -85,6 +97,7 @@ void flash(int times) {
 */
 int level(int length) {
   display_level(length);
+  delay(DUR*2);
   return check_level(length);
 }
 
@@ -158,9 +171,13 @@ int main(void) {
   // Enable output for LED_LEFT and LED_RIGHT
   *GPIO_OUTPUT_EN |= (1 << LED_LEFT) | (1 << LED_RIGHT);
 
-  while (1) {
+  int win_Flag = 0;
+  while (current_length < 13) {
     current_length = level(current_length);
     // pause between levels
     delay(DUR * 4);
   }
+
+  // Winning display
+  win_display();
 }
