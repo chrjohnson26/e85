@@ -76,7 +76,7 @@ module mainFSM(input logic clk,
 			case (state)
 				S0:		begin
 							nextstate = S1;
-							adrsrc  = 0;
+							adrsrc  = 1'b0;
 							irwrite = 1'b1;
 							alusrca = 2'b00;
 							alusrcb = 2'b10;
@@ -90,18 +90,20 @@ module mainFSM(input logic clk,
 							else if (op == 7'b0110011) 							nextstate = S6;
 							else if (op == 7'b0010011) 							nextstate = S8;
 							else if (op == 7'b1101111) 							nextstate = S9;
-							else if (op == 7'b1100011)								nextstate = S10;
+							else 	  														nextstate = S10;
 							alusrca = 2'b01;
 							alusrcb = 2'b01;
 							aluop   = 2'b00;
+							resultsrc = 2'b10;
 				end
 							
 				S2:		begin
 							if 	  (op == 7'b0000011)		nextstate = S3;
-							else if (op == 7'b0100011) 	nextstate = S5;
+							else	  							 	nextstate = S5;
 							alusrca = 2'b10;
 							alusrcb = 2'b01;
 							aluop   = 2'b00;
+							resultsrc = 2'b10;
 				end
 							
 				S3: 		begin
@@ -128,6 +130,7 @@ module mainFSM(input logic clk,
 							alusrca   = 2'b10;
 							alusrcb   = 2'b00;
 							aluop     = 2'b10;
+							resultsrc = 2'b10;
 				end
 							
 				S7: 		begin
@@ -141,6 +144,7 @@ module mainFSM(input logic clk,
 							alusrca 	 = 2'b10;
 							alusrcb   = 2'b01;
 							aluop		 = 2'b10;
+							resultsrc = 2'b10;
 				end
 				
 				S9: 		begin
@@ -157,6 +161,7 @@ module mainFSM(input logic clk,
 							resultsrc = 2'b00;
 							branch    = 1'b1;
 				end
+				default:	nextstate = state;
 		endcase					
 endmodule
 		
