@@ -1,3 +1,4 @@
+// lab10_CJ
 // risc-v multicycle controller
 // Christian Johnson
 // chrjohnson@hmc.edu
@@ -22,7 +23,7 @@ module controller(input logic clk,
 		logic pcupdate, branch;	
 		logic [1:0] aluop;
 		
-		mainFSM fsm(clk, reset, op, pcupdate, branch, regwrite, memwrite, irwrite, resultsrc alusrca, alusrcb, adrsrc, aluop);
+		mainFSM fsm(clk, reset, op, pcupdate, branch, regwrite, memwrite, irwrite, resultsrc, alusrca, alusrcb, adrsrc, aluop);
 		
 		
 		// aluop[1]: a
@@ -34,7 +35,7 @@ module controller(input logic clk,
 		
 		// op[5]: 	 f
 		// funct7b5: g
-		alu_decoder aludec(aluop[1], aluop[0], funct3[2], funct3[1], funct3[0], op[5], funct7b5, y2, y1, y0);
+		alu_decoder aludec(aluop[1], aluop[0], funct3[2], funct3[1], funct3[0], op[5], funct7b5, alucontrol[2], alucontrol[1], alucontrol[0]);
 		
 		instr_decoder id(op, immsrc);
 		
@@ -73,18 +74,90 @@ module mainFSM(input logic clk,
 		// next state logic
 		always_comb
 			case (state)
-				S0:		nextstate = S1;
-							adrsrc = 1'b0;
+				S0:		begin
+							nextstate = S1;
+							adrsrc  = 0;
 							irwrite = 1'b1;
 							alusrca = 2'b00;
 							alusrcb = 2'b10;
 							aluop = 2'b00;
 							resultsrc = 2'b10;
 							pcupdate = 1'b1;
+				end
 							
-				S1: 		
-					
-					
+				S1:		begin
+							if ((op == 7'b0000011) | (op == 7'b0100011))		nextstate = S2;
+							else if (op == 7'b0110011) 							nextstate = S6;
+							else if (op == 7'b0010011) 							nextstate = S8;
+							else if (op == 7'b1101111) 							nextstate = S9;
+							else if (op == 7'b1100011)								nextstate = S10;
+							alusrca = 2'b01;
+							alusrcb = 2'b01;
+							aluop   = 2'b00;
+				end
+							
+				S2:		begin
+							if 	  (op == 7'b0000011)		nextstate = S3;
+							else if (op == 7'b0100011) 	nextstate = S5;
+							alusrca = 2'b10;
+							alusrcb = 2'b01;
+							aluop   = 2'b00;
+				end
+							
+				S3: 		begin
+							nextstate = S4;
+							resultsrc = 2'b00;
+							adrsrc    = 1'b1;
+				end
+				
+				S4:		begin
+							nextstate = S0;
+							resultsrc = 2'b01;
+							regwrite  = 1'b1;
+				end
+							
+				S5: 		begin
+							nextstate = S0;
+							resultsrc = 2'b00;
+							adrsrc    = 1'b1;
+							memwrite  = 1'b1;
+				end
+							
+				S6: 		begin
+							nextstate = S7;
+							alusrca   = 2'b10;
+							alusrcb   = 2'b00;
+							aluop     = 2'b10;
+				end
+							
+				S7: 		begin
+							nextstate = S0;
+							resultsrc = 2'b00;
+							regwrite  = 1'b1;
+				end
+							
+				S8:		begin
+							nextstate = S7;
+							alusrca 	 = 2'b10;
+							alusrcb   = 2'b01;
+							aluop		 = 2'b10;
+				end
+				
+				S9: 		begin
+							nextstate = S7;
+							resultsrc = 2'b00;
+							regwrite  = 1'b1;
+				end
+				
+				S10: 		begin
+							nextstate = S0;
+							alusrca   = 2'b10;
+							alusrcb   = 2'b00;
+							aluop     = 2'b01;
+							resultsrc = 2'b00;
+							branch    = 1'b1;
+				end
+		endcase					
 endmodule
 		
 			
