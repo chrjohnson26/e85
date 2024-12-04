@@ -221,7 +221,7 @@ module MainDec(input  logic [6:0] op,
     endcase
 endmodule
 
-mmodule aludec(input  logic       f7b5, op5,
+module aludec(input  logic       f7b5, op5,
               input  logic [2:0] funct3,
               input  logic [1:0] aluop,
               output logic [2:0] alucontrol);
