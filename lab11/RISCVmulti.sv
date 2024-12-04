@@ -32,11 +32,8 @@ module unimem(input  logic          clk, WE,
     initial
     $readmemh("memfile.dat",RAM);
 
-    assign RD = RAM[A[31:2]]; // word aligned
-
     always_ff @(posedge clk)
         if (WE) RAM[A[31:2]] <= WD;
-
 endmodule
 
 // RISCVmulti module containing calls to the controller and datapath modules
@@ -85,32 +82,47 @@ module datapath(input  logic         clk, reset
     logic [31:0]    immext;
     logic [31:0]    aluresult, aluout;
     logic [31:0]    result; 
+    logic [31:0]    regfileout1, regfileout2;
 
     // pc logic
+    flopenr #(32) pcreg(clk, reset, pcwrite, pcnext, pc);
 
     // adr logic
+    mux2 #(32)    adrmux(pc, result, adrsrc, adr);
 
     // oldpc/instr logic
+    flopenr #(32) oldpcreg(clk, reset, irwrite, pc, oldpc);
+    flopenr #(32) instrreg(clk, reset, irwrite, readdata, instr);
 
     // data logic
+    flopr #(32)   datareg(clk, reset, readdata, data);
 
     // register file logic
+    RegFile       rf(clk, regwrite, instr[19:15], instr[24:20],
+                     instr[11:7], result, regfileout1, regfileout2);
 
     // extend logic
+    Extend        ext(Instr[31:7], immsrc, immext);
 
     // a/writedata logic
+    flopr #(32)   areg(clk, reset, regfileout1, a);
+    flopr #(32)   writedatareg(clk, reset, regfileout2, writedata);
 
     // srca logic
+    mux3  #(32)   srcamux(pc, oldpc, a, alusrca, srca); 
 
     // srcb logic
+    mux3  #(32)   srcbmux(writedata, immext, 32'd4, alusrcb, srcb);
 
     // alu logic
+    alu           alu(srca, srcb, alucontrol, aluresult, zero);
 
     // aluout logic
+    flopr         aluoutreg(clk, reset, aluresult, aluout);
 
     // result logic
-
-
+    mux3  #(32)   resultmux(aluout, data, aluresult, resultsrc, result);
+    assign        pcnext = result;
 endmodule
 
 // Structural Verilog Code for the ALU controller (Adapted from lab10_CJ)
