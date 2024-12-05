@@ -47,7 +47,7 @@ module RISCVmulti(input         clk, reset,
     logic            zero, adrsrc, irwrite, pcwrite, regwrite;
     logic [1:0]      resultsrc, alusrcb, alusrca, immsrc;
     logic [2:0]      alucontrol;
-	 logic [31:0]		instr;
+	logic [31:0]		instr;
 
     // instantiate the controller and datapath
     multicycle_controller c(clk, reset, instr[6:0], 
