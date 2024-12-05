@@ -119,7 +119,7 @@ module datapath(input  logic         clk, reset,
     alu           alu(srca, srcb, alucontrol, aluresult, zero);
 
     // aluout logic
-    flopr         aluoutreg(clk, reset, aluresult, aluout);
+    flopr #(32)        aluoutreg(clk, reset, aluresult, aluout);
 
     // result logic
     mux3  #(32)   resultmux(aluout, data, aluresult, resultsrc, result);
