@@ -10,10 +10,10 @@ module top(input  logic        clk, reset,
            output logic        memwrite);
 
     // Declaring internal logic for the top module
-    logic [31:0]    instr, readdata;
+    logic [31:0]    readdata;
 
     // instantiate processor and memory
-    RISCVmulti      RISCVmulti(clk, reset, memwrite, instr, writedata, dataadr, readdata);
+    RISCVmulti      RISCVmulti(clk, reset, memwrite, writedata, dataadr, readdata);
     unimem          unimem(clk, memwrite, dataadr, writedata, readdata);
 
 endmodule
@@ -26,20 +26,20 @@ module unimem(input  logic          clk, WE,
 
     // Declaring and initalizing RAM
     logic  [31:0] RAM[63:0];
-    assign RD = RAM[A[31:2]]; // word aligned
-
-    // Instruction memory logic
-    initial
-    $readmemh("memfile.dat",RAM);
-
-    always_ff @(posedge clk)
-        if (WE) RAM[A[31:2]] <= WD;
+	 
+	 // Instruction memory logic
+    initial 
+		$readmemh("memfile.dat",RAM);
+	 
+	always_ff @(posedge clk)
+		if (WE) RAM[A[31:2]] <= WD;
+ 
+   assign RD = RAM[A[31:2]]; // word aligned
 endmodule
 
 // RISCVmulti module containing calls to the controller and datapath modules
 module RISCVmulti(input         clk, reset,
                   output        memwrite,
-                  input  [31:0] instr,
                   output [31:0] writedata, dataadr,
                   input  [31:0] readdata);
 
@@ -47,6 +47,7 @@ module RISCVmulti(input         clk, reset,
     logic            zero, adrsrc, irwrite, pcwrite, regwrite;
     logic [1:0]      resultsrc, alusrcb, alusrca, immsrc;
     logic [2:0]      alucontrol;
+	 logic [31:0]		instr;
 
     // instantiate the controller and datapath
     multicycle_controller c(clk, reset, instr[6:0], 
@@ -58,12 +59,12 @@ module RISCVmulti(input         clk, reset,
     datapath dp(clk, reset, regwrite,
                 adrsrc, pcwrite, irwrite,
                 resultsrc, immsrc, alucontrol,
-                alusrca, alusrcb, instr,
-                readdata, zero, dataadr, writedata);
+                alusrca, alusrcb,
+                readdata, instr, zero, dataadr, writedata);
 endmodule
 
 // Datapath module
-module datapath(input  logic         clk, reset
+module datapath(input  logic         clk, reset,
                 input  logic         regwrite,
                 input  logic         adrsrc,
                 input  logic         pcwrite,
@@ -71,7 +72,8 @@ module datapath(input  logic         clk, reset
                 input  logic [1:0]   resultsrc, immsrc, 
                 input  logic [2:0]   alucontrol,
                 input  logic [1:0]   alusrca, alusrcb,
-                input  logic [31:0]  instr, readdata,
+                input  logic [31:0]  readdata,
+		output logic [31:0]  instr,
                 output logic         zero,
                 output logic [31:0]  adr, writedata);
 
@@ -102,7 +104,7 @@ module datapath(input  logic         clk, reset
                      instr[11:7], result, regfileout1, regfileout2);
 
     // extend logic
-    Extend        ext(Instr[31:7], immsrc, immext);
+    Extend        ext(instr[31:7], immsrc, immext);
 
     // a/writedata logic
     flopr #(32)   areg(clk, reset, regfileout1, a);
@@ -118,7 +120,7 @@ module datapath(input  logic         clk, reset
     alu           alu(srca, srcb, alucontrol, aluresult, zero);
 
     // aluout logic
-    flopr         aluoutreg(clk, reset, aluresult, aluout);
+    flopr #(32)        aluoutreg(clk, reset, aluresult, aluout);
 
     // result logic
     mux3  #(32)   resultmux(aluout, data, aluresult, resultsrc, result);
@@ -362,14 +364,26 @@ module flopr #(parameter WIDTH = 8)
 endmodule
 
 // flopenr module (resetable flip-flop with enable)
-module flopenr #(parameter WIDTH = 8)
-                (input logic                clk, reset, en,
-                input  logic [WIDTH–1:0]     d,
-                output logic [WIDTH–1:0] q);
+/*module flopenr #(parameter WIDTH = 8)
+                (input  logic                   clk, reset, en,
+                 input  logic [WIDTHâ1:0]       d,
+                 output logic [WIDTHâ1:0] 		q);
 
     always_ff @(posedge clk, posedge reset)
         if      (reset)      q <= 0;
-        else if (en)    q <= d;
+        else if (en)    	  q <= d;
+endmodule
+*/
+
+module flopenr #(parameter WIDTH = 8)
+					 (input logic					clk, reset,
+					  input logic 					en,
+					  input logic  [WIDTH-1:0] d,
+					  output logic [WIDTH-1:0] q);
+
+	always_ff @(posedge clk, posedge reset)
+		if (reset) q <= 0;
+		else if (en) 	q <=d;
 endmodule
 
 // 2x1 Mux module
